@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ── Custom scrollbar ── */
+.admin-scroll {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #d0cdc8 transparent;
+}
+.admin-scroll::-webkit-scrollbar { width: 5px; }
+.admin-scroll::-webkit-scrollbar-thumb { background: #d0cdc8; border-radius: 3px; }
+
+/* ── Photo stack animation ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+.pin-hover:hover .pin-stack {
+  animation: float 2s ease-in-out infinite;
+}
+
+/* ── Dashed connector ── */
+.pin-connector {
+  width: 1.5px;
+  background: repeating-linear-gradient(
+    to bottom,
+    #b0aca6 0px,
+    #b0aca6 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+
+/* ── Lightbox overlay ── */
+.lightbox-overlay {
+  background: rgba(20, 18, 16, 0.75);
+  backdrop-filter: blur(6px);
+}
+
+/* ── Glass card ── */
+.glass {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
