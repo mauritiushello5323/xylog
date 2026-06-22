@@ -37,6 +37,7 @@ jobs:
         env:
           # These come from GitHub → Settings → Secrets and variables → Actions
           # If not set yet, the site builds in demo mode (still works!)
+          VITE_AMAP_KEY: ${{ secrets.VITE_AMAP_KEY }}
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
           VITE_ADMIN_PASSWORD: ${{ secrets.VITE_ADMIN_PASSWORD }}

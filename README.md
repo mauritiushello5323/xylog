@@ -7,13 +7,14 @@
 ## 目录
 
 1. [本地预览](#本地预览)
-2. [注册 Supabase（数据库 + 存储）](#注册-supabase)
-3. [建表 SQL](#建表-sql)
-4. [创建 Storage 桶](#创建-storage-桶)
-5. [填写密钥到 .env](#填写密钥到-env)
-6. [部署到 Vercel](#部署到-vercel)
-7. [日常维护](#日常维护)
-8. [自定义站名和配色](#自定义站名和配色)
+2. [注册高德地图 API Key](#注册高德地图-api-key)
+3. [注册 Supabase（数据库 + 存储）](#注册-supabase)
+4. [建表 SQL](#建表-sql)
+5. [创建 Storage 桶](#创建-storage-桶)
+6. [填写密钥到 .env](#填写密钥到-env)
+7. [部署到 GitHub Pages](#部署到-github-pages)
+8. [日常维护](#日常维护)
+9. [自定义站名和配色](#自定义站名和配色)
 
 ---
 
@@ -30,7 +31,43 @@ npm run dev           # 启动本地服务器
 ```
 
 浏览器访问 **http://localhost:5173** 即可看到演示数据效果。
-访问 **http://localhost:5173/admin** 进入管理后台（密码见下方 `.env` 配置）。
+访问 **http://localhost:5173/#/admin** 进入管理后台（密码见下方 `.env` 配置）。
+
+> 本地预览时地图需要 `.env` 中配置了 `VITE_AMAP_KEY`，否则只显示占位文字（演示数据仍可见）。
+
+---
+
+## 注册高德地图 API Key
+
+地图使用**高德 JS API**，需要一个免费的 API Key。整个流程约 5 分钟。
+
+### 第一步：注册高德开放平台账号
+
+1. 打开 [https://lbs.amap.com/](https://lbs.amap.com/)，点击右上角**注册/登录**
+2. 用手机号注册，完成实名认证（个人开发者，免费）
+
+### 第二步：创建应用并获取 Key
+
+1. 登录后进入**控制台** → 点击**创建新应用**，填写应用名称（如 `xylog`）
+2. 在应用里点击**添加 Key**：
+   - Key 名称：随意（如 `web`）
+   - 服务平台：选 **Web端 (JS API)**
+   - 白名单域名（每行一个，填入你的部署地址）：
+     ```
+     mauritiushello5323.github.io
+     localhost
+     127.0.0.1
+     ```
+3. 点击**提交**，复制生成的 Key（形如 `abc123def456...`）
+
+### 第三步：填入 Key
+
+- **本地预览**：在 `.env` 文件中添加 `VITE_AMAP_KEY=你的Key`
+- **GitHub Pages 部署**：在 GitHub → Settings → Secrets and variables → Actions 中添加 Secret：`VITE_AMAP_KEY` = 你的Key
+
+### 可选：更换地图风格
+
+编辑 `src/config.js` 中的 `MAP_STYLE`，可选值见文件注释（远山黛、幻影黑、马卡龙等 11 种风格）。
 
 ---
 
@@ -125,6 +162,7 @@ CREATE POLICY "public delete storage" ON storage.objects
 在项目根目录创建 `.env` 文件（复制 `.env.example` 重命名），填入：
 
 ```
+VITE_AMAP_KEY=你的高德Key
 VITE_SUPABASE_URL=https://你的项目ID.supabase.co
 VITE_SUPABASE_ANON_KEY=eyJ...（anon key 完整粘贴）
 VITE_ADMIN_PASSWORD=你设的密码
@@ -134,39 +172,39 @@ VITE_ADMIN_PASSWORD=你设的密码
 
 ---
 
-## 部署到 Vercel
+## 部署到 GitHub Pages
 
-### 第一步：上传代码到 GitHub
+代码已配置好 GitHub Actions，推送到 `main` 分支即自动构建部署。
 
-1. 注册 [GitHub](https://github.com)（有账号跳过）
-2. 点击右上角 **+** → **New repository**，填写名字（如 `xylog`），选 Private，点 Create
-3. 安装 [Git for Windows](https://git-scm.com/download/win)
-4. 在项目文件夹打开终端，运行：
+### 第一步：在 GitHub 仓库添加 Secrets
+
+GitHub 仓库 → **Settings → Secrets and variables → Actions → New repository secret**，添加以下四条：
+
+| Secret 名称 | 值 |
+|------------|---|
+| `VITE_AMAP_KEY` | 你的高德 API Key |
+| `VITE_SUPABASE_URL` | 你的 Supabase URL |
+| `VITE_SUPABASE_ANON_KEY` | 你的 Supabase anon key |
+| `VITE_ADMIN_PASSWORD` | 你设的管理员密码 |
+
+> `VITE_AMAP_KEY` 是必填项，否则地图无法显示。其他三项未填时网站以演示模式运行。
+
+### 第二步：开启 GitHub Pages
+
+GitHub 仓库 → **Settings → Pages → Source** 选 **GitHub Actions**，保存。
+
+### 第三步：推送代码触发部署
 
 ```bash
-git init
 git add .
-git commit -m "init"
-git remote add origin https://github.com/你的用户名/xylog.git
-git push -u origin main
+git commit -m "switch to AMap JS API"
+git push
 ```
 
-### 第二步：连接 Vercel
+几分钟后在 GitHub → **Actions** 标签页看到绿色对勾，网站即上线：
+`https://mauritiushello5323.github.io/xylog/`
 
-1. 打开 [https://vercel.com](https://vercel.com)，用 GitHub 登录
-2. 点击 **Add New → Project**，选你刚推送的 `xylog` 仓库
-3. Framework Preset 选 **Vite**（通常自动识别）
-4. 展开 **Environment Variables**，添加三条：
-
-   | Key | Value |
-   |-----|-------|
-   | `VITE_SUPABASE_URL` | 你的 Supabase URL |
-   | `VITE_SUPABASE_ANON_KEY` | 你的 anon key |
-   | `VITE_ADMIN_PASSWORD` | 你的管理密码 |
-
-5. 点击 **Deploy**，等待约 1 分钟，Vercel 会给你一个 `.vercel.app` 网址。
-
-以后只要修改代码并 `git push`，网站会自动更新。
+以后只要 `git push`，网站自动更新。
 
 ---
 
