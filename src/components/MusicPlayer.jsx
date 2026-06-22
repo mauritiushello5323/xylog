@@ -39,9 +39,9 @@ export default function MusicPlayer({ musicUrl }) {
 
   return (
     <div
-      className="fixed bottom-5 left-5 flex items-center gap-2.5"
-      style={{ ...{}, zIndex: 1000 }}
       style={{
+        position: 'fixed', bottom: 68, left: 20, zIndex: 1000,
+        display: 'flex', alignItems: 'center', gap: 10,
         background: 'rgba(255,255,255,0.88)',
         backdropFilter: 'blur(10px)',
         WebkitBackdropFilter: 'blur(10px)',

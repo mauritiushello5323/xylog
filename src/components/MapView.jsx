@@ -3,6 +3,8 @@ import DayNav from './DayNav'
 import FilterBar from './FilterBar'
 import MusicPlayer from './MusicPlayer'
 import Lightbox from './Lightbox'
+import BottomTabBar from './BottomTabBar'
+import QuickAddDrawer from './QuickAddDrawer'
 import { getEntries, getDays, getDayMusic } from '../lib/api'
 import { isDemo } from '../lib/supabase'
 import { MAP_CENTER, MAP_ZOOM, MAP_STYLE } from '../config'
@@ -37,6 +39,23 @@ export default function MapView() {
   const [musicUrl,      setMusicUrl]      = useState(null)
   const [loading,       setLoading]       = useState(true)
   const [mapError,      setMapError]      = useState(null)
+  const [activeTab,     setActiveTab]     = useState('map')
+
+  // Returns current map center {lat, lng} for QuickAddDrawer position grab
+  function getMapCenter() {
+    if (!mapRef.current) return null
+    const c = mapRef.current.getCenter()
+    return { lat: c.getLat(), lng: c.getLng() }
+  }
+
+  function handleTabChange(tab) {
+    setActiveTab(tab)
+  }
+
+  function handleAddSuccess() {
+    // Re-fetch entries for current day after a new one is added
+    getEntries(currentDay).then(setEntries).catch(console.error)
+  }
 
   // ── 1. Init AMap ───────────────────────────────────────────────
   useEffect(() => {
@@ -51,6 +70,7 @@ export default function MapView() {
           zoom:      MAP_ZOOM,
           center:    [MAP_CENTER[1], MAP_CENTER[0]],  // AMap uses [lng, lat]
           mapStyle:  MAP_STYLE,
+          features:  ['bg', 'road', 'building', 'point'],
           resizeEnable: true,
           rotateEnable: false,
         })
@@ -194,19 +214,29 @@ export default function MapView() {
 
       {/* ── UI overlays (z-index > AMap's internal layers) ── */}
       <DayNav days={days} currentDay={currentDay} onPrev={handlePrev} onNext={handleNext} />
-      <FilterBar active={activeFilter} onSelect={setActiveFilter} availableCategories={availableCategories} />
+
+      {/* FilterBar sits above the tab bar (bottom: 56px tab + 12px gap) */}
+      <FilterBar
+        active={activeFilter}
+        onSelect={setActiveFilter}
+        availableCategories={availableCategories}
+        bottomOffset={68}
+      />
+
       <MusicPlayer musicUrl={musicUrl} />
 
-      <a
-        href="#/admin"
-        style={{
-          position: 'fixed', bottom: 20, right: 20, zIndex: 1000,
-          fontFamily: '"IBM Plex Mono",monospace', fontSize: 10,
-          color: '#c0bab4', textDecoration: 'none',
-        }}
-      >
-        admin
-      </a>
+      {/* Bottom tab bar */}
+      <BottomTabBar activeTab={activeTab} onTabChange={handleTabChange} />
+
+      {/* Quick-add drawer */}
+      {activeTab === 'add' && (
+        <QuickAddDrawer
+          currentDay={currentDay}
+          getMapCenter={getMapCenter}
+          onClose={() => setActiveTab('map')}
+          onSuccess={handleAddSuccess}
+        />
+      )}
 
       {selected && <Lightbox entry={selected} onClose={() => setSelected(null)} />}
     </div>

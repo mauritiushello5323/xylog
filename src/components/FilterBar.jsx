@@ -1,13 +1,13 @@
 import { CATEGORIES } from '../utils/categoryColors'
 
-export default function FilterBar({ active, onSelect, availableCategories }) {
+export default function FilterBar({ active, onSelect, availableCategories, bottomOffset = 20 }) {
   // Only show categories that appear in the current data + 'all'
   const keys = ['all', ...availableCategories]
 
   return (
     <div
-      className="fixed bottom-5 left-1/2 -translate-x-1/2 flex gap-2 flex-wrap justify-center"
-      style={{ maxWidth: '90vw', zIndex: 1000 }}
+      className="fixed left-1/2 -translate-x-1/2 flex gap-2 flex-wrap justify-center"
+      style={{ maxWidth: '90vw', zIndex: 1000, bottom: bottomOffset }}
     >
       {keys.map((key) => {
         const cat = CATEGORIES[key] ?? CATEGORIES.other
