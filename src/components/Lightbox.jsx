@@ -28,7 +28,8 @@ export default function Lightbox({ entry, onClose }) {
 
   return (
     <div
-      className="lightbox-overlay fixed inset-0 z-50 flex items-center justify-center p-4"
+      className="lightbox-overlay fixed inset-0 flex items-center justify-center p-4"
+      style={{ zIndex: 2000 }}
       onClick={onClose}
     >
       <div

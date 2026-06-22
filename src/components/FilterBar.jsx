@@ -6,8 +6,8 @@ export default function FilterBar({ active, onSelect, availableCategories }) {
 
   return (
     <div
-      className="fixed bottom-5 left-1/2 -translate-x-1/2 z-30 flex gap-2 flex-wrap justify-center"
-      style={{ maxWidth: '90vw' }}
+      className="fixed bottom-5 left-1/2 -translate-x-1/2 flex gap-2 flex-wrap justify-center"
+      style={{ maxWidth: '90vw', zIndex: 1000 }}
     >
       {keys.map((key) => {
         const cat = CATEGORIES[key] ?? CATEGORIES.other

@@ -1,14 +1,14 @@
-// Demo data shown when Supabase is not configured yet
-// Images use picsum.photos placeholders
+// 演示数据 — Supabase 未连接时显示
+// 坐标：上海·法租界 / 新天地一带（高德 GCJ-02 坐标系）
 export const DEMO_ENTRIES = [
   {
     id: 'd1',
     day: 1,
     location_name: 'VINTAGE SHOP A',
     category: 'shopping',
-    x: 57,
-    y: 14,
-    description: '发现了一件1980年代的运动夹克，店主说这件来自大阪一家关闭的棒球俱乐部。试穿之后，果断带走。',
+    lat: 31.2255,
+    lng: 121.4768,
+    description: '发现了一件 1980 年代的工装夹克，领口有一枚别针，店主说这件来自上海一家关闭的国营厂。试穿之后，果断带走。',
     images: [
       'https://picsum.photos/seed/va1/400/400',
       'https://picsum.photos/seed/va2/400/400',
@@ -19,11 +19,11 @@ export const DEMO_ENTRIES = [
   {
     id: 'd2',
     day: 1,
-    location_name: 'VINTAGE SHOP B',
+    location_name: 'VINYL RECORD STORE',
     category: 'shopping',
-    x: 47,
-    y: 23,
-    description: '整面墙都是旧唱片。找到了一张细野晴臣的黑胶，封面有一点折痕，但唱片本身完好无损。',
+    lat: 31.2238,
+    lng: 121.4748,
+    description: '整面墙都是旧唱片。找到了一张李宗盛 1985 年的专辑，封面略有磨损，但音轨完好。坐在店里听了半张，才终于决定买。',
     images: [
       'https://picsum.photos/seed/vb1/400/400',
       'https://picsum.photos/seed/vb2/400/400',
@@ -33,11 +33,11 @@ export const DEMO_ENTRIES = [
   {
     id: 'd3',
     day: 1,
-    location_name: 'DANGO STAND',
+    location_name: '生煎铺',
     category: 'food',
-    x: 62,
-    y: 29,
-    description: '三色团子，店里奶奶现做现烤，酱汁烧得微微焦，甜香味飘出去老远。一串 150 日元。',
+    lat: 31.2265,
+    lng: 121.4782,
+    description: '门口排了二十分钟，一两四个，底部金黄酥脆，咬开烫嘴，汤汁顺着手背流下来。值得。',
     images: [
       'https://picsum.photos/seed/dg1/400/400',
       'https://picsum.photos/seed/dg2/400/400',
@@ -47,11 +47,11 @@ export const DEMO_ENTRIES = [
   {
     id: 'd4',
     day: 1,
-    location_name: 'JAZZ CAFE',
+    location_name: 'JAZZ BAR',
     category: 'cafe',
-    x: 41,
-    y: 43,
-    description: '窄窄的两层楼，底层是吧台，二楼是唱片架。点了一杯冰滴咖啡，坐在角落听了两首 Coltrane。',
+    lat: 31.2208,
+    lng: 121.4725,
+    description: '下午五点开门，进去时只有调酒师一个人在擦杯子。点了一杯 Old Fashioned，坐到吧台角落，爵士乐从墙上的音箱流出来，音量刚好。',
     images: [
       'https://picsum.photos/seed/jz1/400/400',
       'https://picsum.photos/seed/jz2/400/400',
@@ -62,11 +62,11 @@ export const DEMO_ENTRIES = [
   {
     id: 'd5',
     day: 1,
-    location_name: 'SKATEBOARD SHOP',
+    location_name: 'SKATE SHOP',
     category: 'shopping',
-    x: 60,
-    y: 47,
-    description: '认识了一个本地滑手，他推荐了街区里最好的滑板坡道，画在地图背面告诉了我。',
+    lat: 31.2248,
+    lng: 121.4798,
+    description: '店里的小哥帮我推荐了附近一条没什么人知道的街道，画在收据背面告诉了我。那条路比这里更值得去。',
     images: [
       'https://picsum.photos/seed/sk1/400/400',
       'https://picsum.photos/seed/sk2/400/400',
@@ -76,11 +76,11 @@ export const DEMO_ENTRIES = [
   {
     id: 'd6',
     day: 1,
-    location_name: 'ABOVE THE CITY',
+    location_name: '天台',
     category: 'sightseeing',
-    x: 50,
-    y: 54,
-    description: '商场顶层的露天平台，无意间爬上去的。整个城市铺在脚下，太阳快落山，光线很软。',
+    lat: 31.2222,
+    lng: 121.4755,
+    description: '楼梯间发现一扇没锁的门，推开是个废弃的天台。整条路的梧桐树铺在脚下，光线很软，站了很久，没说话。',
     images: [
       'https://picsum.photos/seed/ab1/400/400',
     ],
@@ -89,11 +89,11 @@ export const DEMO_ENTRIES = [
   {
     id: 'd7',
     day: 1,
-    location_name: 'HOTEL A',
+    location_name: '老弄堂民宿',
     category: 'stay',
-    x: 36,
-    y: 63,
-    description: '房间小得刚好，窗户朝东，早上会被光叫醒。床头放着上一位房客留下的地图，我把它夹进了日记本。',
+    lat: 31.2195,
+    lng: 121.4715,
+    description: '房间里有一张木桌和一盏台灯，窗户对着天井，夜里能听到楼下邻居说话的声音。床头有上一位客人留下的一张明信片，我没有拿走它。',
     images: [
       'https://picsum.photos/seed/ht1/400/400',
       'https://picsum.photos/seed/ht2/400/400',
@@ -103,11 +103,11 @@ export const DEMO_ENTRIES = [
   {
     id: 'd8',
     day: 1,
-    location_name: 'MONORAIL',
+    location_name: '地铁站',
     category: 'transport',
-    x: 77,
-    y: 46,
-    description: '坐了两站，只为了看一眼从轨道上俯视城市的角度。车厢几乎是空的，终点站有人在等。',
+    lat: 31.2272,
+    lng: 121.4740,
+    description: '坐过了一站，没有下车。因为那一站的月台灯光很好，想多看一会儿。',
     images: [
       'https://picsum.photos/seed/mr1/400/400',
     ],
@@ -116,39 +116,40 @@ export const DEMO_ENTRIES = [
   {
     id: 'd9',
     day: 1,
-    location_name: 'SOMEWHERE IN THE CITY',
+    location_name: 'SOMEWHERE',
     category: 'sightseeing',
-    x: 73,
-    y: 25,
-    description: '路过一条不知名的巷子，墙上有一幅褪色的壁画。站着看了很久，没有拍视频，只有这一张照片。',
+    lat: 31.2260,
+    lng: 121.4710,
+    description: '走错了路，拐进一条不认识的巷子。一面旧砖墙，一辆停着的自行车，一只坐在门槛上的猫。就这些。',
     images: [
       'https://picsum.photos/seed/sw1/400/400',
       'https://picsum.photos/seed/sw2/400/400',
     ],
     music_url: null,
   },
+  // ── Day 2 ─────────────────────────────────────────────────────
   {
     id: 'd10',
-    day: 1,
-    location_name: 'AIRPORT',
-    category: 'transport',
-    x: 32,
-    y: 74,
-    description: '出发前在机场吃了最后一碗拉面。登机口的椅子很硬，但睡着了。',
+    day: 2,
+    location_name: '早市',
+    category: 'food',
+    lat: 31.2242,
+    lng: 121.4762,
+    description: '六点半就开摊了。买了一袋豆浆和两根油条，站在路边吃完。',
     images: [
-      'https://picsum.photos/seed/ap1/400/400',
+      'https://picsum.photos/seed/mm1/400/400',
+      'https://picsum.photos/seed/mm2/400/400',
     ],
     music_url: null,
   },
-  // ── Day 2 ──────────────────────────────────────────────────────
   {
     id: 'd11',
     day: 2,
-    location_name: 'RECORD STORE',
-    category: 'shopping',
-    x: 44,
-    y: 32,
-    description: '角落里有一箱标价 100 日元的唱片，翻了半小时，找到三张都想要的。',
+    location_name: '独立书店',
+    category: 'cafe',
+    lat: 31.2230,
+    lng: 121.4780,
+    description: '书架比通道还宽，只能侧身走。在文学区站了一小时，买了两本，付钱时老板问我从哪里来。',
     images: [
       'https://picsum.photos/seed/rs1/400/400',
       'https://picsum.photos/seed/rs2/400/400',
@@ -158,25 +159,11 @@ export const DEMO_ENTRIES = [
   {
     id: 'd12',
     day: 2,
-    location_name: 'MORNING MARKET',
-    category: 'food',
-    x: 58,
-    y: 38,
-    description: '7点就开摊了，卖菜的大叔看我是外地人，多塞了几颗橘子。甜的。',
-    images: [
-      'https://picsum.photos/seed/mm1/400/400',
-      'https://picsum.photos/seed/mm2/400/400',
-    ],
-    music_url: null,
-  },
-  {
-    id: 'd13',
-    day: 2,
-    location_name: 'ROOFTOP TERRACE',
+    location_name: '外滩',
     category: 'sightseeing',
-    x: 65,
-    y: 22,
-    description: '老建筑改的咖啡馆，屋顶能看到远处的山。云层很低，山顶被盖住了，但更好看。',
+    lat: 31.2400,
+    lng: 121.4900,
+    description: '傍晚来的，游客很多。但如果背对浦东，只看江面，有一刻觉得这条江和其他城市的河没有太大区别，又觉得这样想太冷漠了。',
     images: [
       'https://picsum.photos/seed/rt1/400/400',
       'https://picsum.photos/seed/rt2/400/400',
@@ -186,7 +173,4 @@ export const DEMO_ENTRIES = [
   },
 ]
 
-export const DEMO_DAY_MUSIC = {
-  1: null, // replace with a public .mp3 URL to test music player
-  2: null,
-}
+export const DEMO_DAY_MUSIC = { 1: null, 2: null }

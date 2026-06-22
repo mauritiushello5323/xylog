@@ -14,6 +14,18 @@ html, body, #root {
   overflow: hidden;
 }
 
+/* ── Leaflet pin overrides ── */
+.xylog-pin {
+  background: transparent !important;
+  border: none !important;
+  overflow: visible !important;
+}
+.leaflet-marker-pane .xylog-pin * {
+  overflow: visible;
+}
+/* Hide default Leaflet focus outline on pins */
+.leaflet-interactive:focus { outline: none; }
+
 /* ── Custom scrollbar ── */
 .admin-scroll {
   overflow-y: auto;

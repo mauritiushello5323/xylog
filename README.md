@@ -59,8 +59,8 @@ CREATE TABLE entries (
   day         integer NOT NULL DEFAULT 1,
   location_name text NOT NULL,
   category    text DEFAULT 'other',
-  x           float8 DEFAULT 50,
-  y           float8 DEFAULT 50,
+  lat         float8,           -- 纬度（点击地图自动填入）
+  lng         float8,           -- 经度
   description text DEFAULT '',
   images      jsonb DEFAULT '[]'::jsonb,
   music_url   text

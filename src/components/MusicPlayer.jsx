@@ -39,7 +39,8 @@ export default function MusicPlayer({ musicUrl }) {
 
   return (
     <div
-      className="fixed bottom-5 left-5 z-30 flex items-center gap-2.5"
+      className="fixed bottom-5 left-5 flex items-center gap-2.5"
+      style={{ ...{}, zIndex: 1000 }}
       style={{
         background: 'rgba(255,255,255,0.88)',
         backdropFilter: 'blur(10px)',

@@ -9,8 +9,8 @@ const BLANK = {
   day: 1,
   location_name: '',
   category: 'other',
-  x: 50,
-  y: 50,
+  lat: null,
+  lng: null,
   description: '',
   images: [],
   music_url: '',
@@ -70,8 +70,8 @@ export default function EntryForm({ entry, onSaved, onCancel }) {
         day: Number(form.day),
         location_name: form.location_name.trim(),
         category: form.category,
-        x: Number(form.x),
-        y: Number(form.y),
+        lat: form.lat ? Number(form.lat) : null,
+        lng: form.lng ? Number(form.lng) : null,
         description: form.description || '',
         images: form.images || [],
         music_url,
@@ -137,9 +137,9 @@ export default function EntryForm({ entry, onSaved, onCancel }) {
       <div>
         <label style={labelStyle}>地图位置（点击或拖拽）</label>
         <DraggableMap
-          x={form.x}
-          y={form.y}
-          onChange={(x, y) => setForm(f => ({ ...f, x, y }))}
+          lat={form.lat}
+          lng={form.lng}
+          onChange={(lat, lng) => setForm(f => ({ ...f, lat, lng }))}
         />
       </div>
 
